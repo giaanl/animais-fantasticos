@@ -1,46 +1,80 @@
-/* const animais= document.getElementById('animais');
-console.log(animais);
 
-const gridSection = document.getElementsByClassName('grid-section');
-console.log(gridSection[0]);
+function initTabNav() {
+const tabMenu = document.querySelectorAll('.js-tabmenu li');
+const tabContent = document.querySelectorAll('.js-tabcontent section');
+tabContent[0].classList.add('ativo');
 
-const primeiraLi = document.querySelector('li');
-console.log(primeiraLi);
+function activeTab(index) {
+    tabContent.forEach((section) => {
+        section.classList.remove('ativo');
+    })
+    tabContent[index].classList.add('ativo');
+}
+tabMenu.forEach((itenMenu, index) => {
+    itenMenu.addEventListener('click', function(){
+        activeTab(index);
+    })
+});
+}
+initTabNav();
 
-const primeiraUl = document.querySelector('ul');
-console.log(primeiraUl);
+function initAccordion() {
+    const accordionList = document.querySelectorAll('.js-accordion dt');
+    const classActive = 'ativo';
+    if(accordionList.length) {
+        accordionList[0].classList.add(classActive);
+        accordionList[0].nextElementSibling.classList.add(classActive);
 
-const linksInternos = document.querySelector('[herf^="#"]');
-console.log(linksInternos);
+            function activeAccordion(){
+                this.classList.toggle(classActive);
+                this.nextElementSibling.classList.toggle(classActive);
+            }
+        accordionList.forEach((item) => {
+            item.addEventListener('click', activeAccordion);
+        });
+    }
+}
+initAccordion();
 
-const animaisImg = document.querySelectorAll('.animais img');
-console.log(animaisImg[1]);
+function internalUrl() {
+    const linksInternos = document.querySelectorAll('.js-menu a[href^="#"]');
 
-const gridSectionHTML = document.getElementsByClassName('grid-section');
-const gridSectionNode = document.querySelectorAll('.grid-section');
+    function scrollToSection(event){
+        event.preventDefault();
+        const href = event.currentTarget.getAttribute('href');
+        const section = document.querySelector(href);
+        const sectionTop = section.offsetTop;
+        window.scrollTo({
+            top: sectionTop,
+            behavior: 'smooth',
+        });
+    }
 
-console.log(gridSectionHTML);
-console.log(gridSectionNode);
+    linksInternos.forEach((link) => {
+        link.addEventListener('click', scrollToSection);
+    });
+}
+internalUrl();
 
-gridSectionNode.forEach(function(item, index){
-    console.log(index);
-})
+function initScrollAnimation(){
+    const sections = document.querySelectorAll('.js-scroll');
 
-const arrayGrid = Array.from(gridSectionHTML);
+    if(sections.length){
+    const half = window.innerHeight * 0.6;
 
-console.log(arrayGrid) */
-
-/* const imagens = document.querySelectorAll('img');
-console.log(imagens); - correta */
-
-/* const imagensImg = document.querySelectorAll('img[src^="img/imagem"]');
-console.log(imagensImg); - Corrigido */
-
-/* const linksInternos = document.querySelectorAll('[href^="#"]');
-console.log(linksInternos); - Correta */
-
-/* const h2Animais = document.querySelectorAll('.animais-descricao h2');
-console.log(h2Animais[0]); - Correta porém metodo diferente */
-
-const pSite = document.querySelectorAll('p');
-console.log(pSite[18])
+    function animationScroll() {
+        sections.forEach((section) => {
+            const sectionTop = section.getBoundingClientRect().top;
+            const isSectionVisible = (sectionTop - half) < 0;
+            if(isSectionVisible)
+                section.classList.add('ativo');
+            else 
+                section.classList.remove('ativo');
+            
+        });
+    }
+    animationScroll();
+    window.addEventListener('scroll', animationScroll);
+}
+}
+initScrollAnimation()
