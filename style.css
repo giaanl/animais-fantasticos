@@ -3,6 +3,16 @@ body, h1, h2, ul, li, p, dd, dt, dl {
     padding: 0px;
 }
 
+.checkbox{
+    display: none;
+}
+
+#darkmodeToggle:checked{
+    background: #faf6ed;
+    color: #222;
+}
+
+
 img{
     display: block;
     max-width: 100%;
@@ -18,7 +28,9 @@ body{
     -webkit-font-smoothing: antialiased;
     display: grid;
     grid-template-columns: 1fr 120px minmax(300px, 800px) 1fr;
+    transition: background 0.2s linear;
 }
+
 
 .menu{
     grid-column: 3 / 5;
@@ -36,6 +48,20 @@ body{
     display: block;
     padding: 10px;
     margin-right: 10px;
+    color: var(--color-text);
+    text-decoration: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: .1em;
+}
+
+
+.menu li label{
+    display: block;
+    padding: 10px;
+    margin-right: 10px;
     color: #222;
     text-decoration: none;
     font-family: 'IBM Plex Mono', monospace;
@@ -43,6 +69,14 @@ body{
     text-transform: uppercase;
     font-size: 0.875rem;
     letter-spacing: .1em;
+}
+
+.label{
+    cursor: pointer;
+}
+
+.label:after{
+    content : ' off';
 }
 
 .grid-section {
@@ -71,7 +105,7 @@ body{
     text-transform: uppercase;
     letter-spacing: .1em;
     margin-bottom: 1rem;
-    color: #e54
+    color: #e54;
 }
 
 .animais h2::before {
@@ -107,8 +141,8 @@ body{
 
 .animais-lista::-webkit-scrollbar-thumb {
     background: #fb5;
-    border-left: 4px solid #faf6ed;
-    border-right: 4px solid #faf6ed;
+    border-left: #faf6ed;
+    border-right: #faf6ed;
 }
 
 .animais-lista::-webkit-scrollbar-track {
